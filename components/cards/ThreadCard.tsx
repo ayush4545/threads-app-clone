@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { formatDateString } from "@/lib/utils";
-// import DeleteThread from "../forms/DeleteThread";
+import DeleteThread from "../forms/DeleteThread";
+
 interface Props {
   id: string;
   currentUserId: string;
@@ -26,7 +27,8 @@ interface Props {
   }[];
   isComment?: boolean;
 }
-const ThreadCard = ({
+
+function ThreadCard({
   id,
   currentUserId,
   parentId,
@@ -36,7 +38,7 @@ const ThreadCard = ({
   createdAt,
   comments,
   isComment,
-}: Props) => {
+}: Props) {
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -101,10 +103,10 @@ const ThreadCard = ({
                 />
               </div>
 
-              {isComment && comments?.length > 0 && (
+              {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
                   <p className="mt-1 text-subtle-medium text-gray-1">
-                    {comments?.length} repl{comments?.length > 1 ? "ies" : "y"}
+                    {comments.length} repl{comments.length > 1 ? "ies" : "y"}
                   </p>
                 </Link>
               )}
@@ -112,13 +114,13 @@ const ThreadCard = ({
           </div>
         </div>
 
-        {/* <DeleteThread
+        <DeleteThread
           threadId={JSON.stringify(id)}
           currentUserId={currentUserId}
           authorId={author.id}
           parentId={parentId}
           isComment={isComment}
-        /> */}
+        />
       </div>
 
       {!isComment && comments.length > 0 && (
@@ -163,6 +165,6 @@ const ThreadCard = ({
       )}
     </article>
   );
-};
+}
 
 export default ThreadCard;
